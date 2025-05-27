@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UTS Data Mining - Sistem Ujian Online</title>
+    
+    <!-- MathJax untuk render persamaan matematika -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -173,6 +178,24 @@
             line-height: 1.6;
             margin-bottom: 30px;
             color: #333;
+        }
+
+        /* Style untuk persamaan matematika */
+        .math-equation {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+            border: 1px solid #e9ecef;
+        }
+
+        .inline-math {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
         }
 
         .options {
@@ -483,7 +506,7 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-value" id="timeSpent">0:00</div>
-                    <div class="stat-label">Waktu</div>
+                                        <div class="stat-label">Waktu</div>
                 </div>
             </div>
 
@@ -499,7 +522,18 @@
     </div>
 
     <script>
-        // Data soal
+        // Configure MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+
+        // Data soal dengan persamaan matematika
         const questions = [
             {
                 question: "Menurut Han dan Kamber (2006) dalam PDF 'Konsep Data Mining', data mining merupakan proses:",
@@ -507,7 +541,7 @@
                     "Pengumpulan data dari berbagai sumber",
                     "Pemilihan atau 'menambang' pengetahuan dari jumlah data yang banyak",
                     "Penyimpanan data dalam data warehouse",
-                                        "Visualisasi data untuk presentasi"
+                    "Visualisasi data untuk presentasi"
                 ],
                 correct: 1
             },
@@ -602,14 +636,15 @@
                 correct: 2
             },
             {
-                question: "Rumus P(X|Ci) = ∏ P(xk|Ci) digunakan dalam model klasifikasi:",
+                question: "Rumus $$P(X|C_i) = \\prod_{k=1}^{n} P(x_k|C_i)$$ digunakan dalam model klasifikasi:",
                 options: [
                     "Support Vector Machine",
                     "Decision Tree",
                     "Naive Bayes Classifier",
                     "K-Nearest Neighbors"
                 ],
-                correct: 2
+                correct: 2,
+                hasEquation: true
             },
             {
                 question: "Metode klasifikasi yang bekerja atas prinsip Structural Risk Minimization (SRM) dengan tujuan menemukan hyperplane terbaik yang memisahkan dua buah kelas adalah:",
@@ -662,14 +697,15 @@
                 correct: 2
             },
             {
-                question: "Rumus 1 - Σpj² digunakan untuk menghitung impurity dengan metode:",
+                question: "Rumus $$Gini = 1 - \\sum p_j^2$$ digunakan untuk menghitung impurity dengan metode:",
                 options: [
                     "Entropy",
                     "Gini Index",
                     "Classification Error",
                     "Misclassification Rate"
                 ],
-                correct: 1
+                correct: 1,
+                hasEquation: true
             },
             {
                 question: "Jika probabilitas kelas 'Bad' adalah 0.375 dan kelas 'Good' adalah 0.625, maka nilai Impurity Parent menggunakan Classification Error Index adalah:",
@@ -712,14 +748,15 @@
                 correct: 1
             },
             {
-                question: "Rumus d(x,y) = √Σ(xk - yk)² adalah rumus untuk:",
+                question: "Rumus $$d(x,y) = \\sqrt{\\sum_{k=1}^{n} (x_k - y_k)^2}$$ adalah rumus untuk:",
                 options: [
                     "Manhattan Distance",
                     "Minkowski Distance dengan r=1",
                     "Euclidean Distance",
                     "Hamming Distance"
                 ],
-                correct: 2
+                correct: 2,
+                hasEquation: true
             },
             {
                 question: "Minkowski Distance menjadi identik dengan Manhattan Distance ketika parameter r bernilai:",
@@ -867,7 +904,7 @@
                     "Kesalahan dalam data",
                     "Struktur database yang optimal",
                     "Pattern dan rule yang berarti",
-                    "Algoritma kompresi data"
+                                        "Algoritma kompresi data"
                 ],
                 correct: 2
             },
@@ -906,7 +943,7 @@
                 options: [
                     "Pengelompokan objek berdasarkan kemiripan",
                     "Memprediksi nilai berkelanjutan",
-                                        "Nilai-nilai suatu variabel yang diatur secara periodik sepanjang periode waktu",
+                    "Nilai-nilai suatu variabel yang diatur secara periodik sepanjang periode waktu",
                     "Menemukan aturan sebab-akibat antar item"
                 ],
                 correct: 2
@@ -982,14 +1019,15 @@
                 correct: 1
             },
             {
-                question: "Dalam perhitungan P(X|Ci) * P(Ci) pada Naive Bayes, P(Ci) merepresentasikan:",
+                question: "Dalam perhitungan $$P(X|C_i) \\times P(C_i)$$ pada Naive Bayes, $$P(C_i)$$ merepresentasikan:",
                 options: [
                     "Probabilitas kemunculan data X",
                     "Probabilitas kondisional atribut xk diberikan kelas Ci",
                     "Probabilitas prior dari kelas Ci",
                     "Probabilitas posterior dari kelas Ci"
                 ],
-                correct: 2
+                correct: 2,
+                hasEquation: true
             },
             {
                 question: "Teknik soft margin dalam SVM digunakan ketika:",
@@ -1139,7 +1177,7 @@
             const question = questions[currentQuestion];
             document.getElementById('questionNumber').textContent = 
                 `Soal ${currentQuestion + 1} dari ${questions.length}`;
-            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('questionText').innerHTML = question.question;
             
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
@@ -1166,6 +1204,13 @@
             document.getElementById('prevBtn').disabled = currentQuestion === 0;
             document.getElementById('nextBtn').textContent = 
                 currentQuestion === questions.length - 1 ? 'Selesai' : 'Selanjutnya →';
+            
+            // Re-render MathJax if question has equations
+            if (question.hasEquation) {
+                setTimeout(() => {
+                    MathJax.typesetPromise([document.getElementById('questionText')]).catch((e) => console.error(e));
+                }, 100);
+            }
         }
 
         // Select option
@@ -1243,11 +1288,16 @@
             
             const gradeElement = document.getElementById('gradeText');
             gradeElement.textContent = `Grade: ${grade}`;
-            gradeElement.className = `grade ${gradeClass}`;
+                        gradeElement.className = `grade ${gradeClass}`;
             document.getElementById('gradeMessage').textContent = gradeMessage;
             
             // Show answer review
             showAnswerReview();
+            
+            // Confetti for high scores
+            if (score >= 85) {
+                setTimeout(createConfetti, 500);
+            }
         }
 
         // Show answer review
@@ -1260,6 +1310,8 @@
                 const reviewItem = document.createElement('div');
                 reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
                 
+                let questionHTML = question.question;
+                
                 reviewItem.innerHTML = `
                     <div class="review-header">
                         <span>Soal ${index + 1}</span>
@@ -1267,7 +1319,7 @@
                             ${isCorrect ? '✓ Benar' : '✗ Salah'}
                         </span>
                     </div>
-                    <div class="review-question">${question.question}</div>
+                    <div class="review-question">${questionHTML}</div>
                     ${!isCorrect ? `
                         <div class="review-answer your-answer">
                             Jawaban Anda: ${userAnswers[index] !== null ? 
@@ -1282,6 +1334,13 @@
                 `;
                 
                 reviewContainer.appendChild(reviewItem);
+                
+                // Re-render MathJax for equations in review
+                if (question.hasEquation) {
+                    setTimeout(() => {
+                        MathJax.typesetPromise([reviewItem]).catch((e) => console.error(e));
+                    }, 100);
+                }
             });
         }
 
@@ -1290,7 +1349,7 @@
             currentQuestion = 0;
             userAnswers = new Array(questions.length).fill(null);
             startTime = Date.now();
-                        timeLimit = 90 * 60;
+            timeLimit = 90 * 60;
             
             document.querySelector('.result-screen').classList.remove('active');
             document.querySelector('.start-screen').classList.add('active');
@@ -1327,8 +1386,12 @@
             
             questions.forEach((question, index) => {
                 const isCorrect = userAnswers[index] === question.correct;
+                // Remove HTML tags and LaTeX from question text for plain text export
+                let cleanQuestion = question.question.replace(/\$\$[^$]+\$\$/g, '[Persamaan Matematika]');
+                cleanQuestion = cleanQuestion.replace(/\$[^$]+\$/g, '[Rumus]');
+                
                 resultText += `Soal ${index + 1}: ${isCorrect ? '✓ BENAR' : '✗ SALAH'}\n`;
-                resultText += `Pertanyaan: ${question.question}\n`;
+                resultText += `Pertanyaan: ${cleanQuestion}\n`;
                 
                 if (!isCorrect) {
                     resultText += `Jawaban Anda: ${userAnswers[index] !== null ? 
@@ -1350,6 +1413,37 @@
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.opacity = Math.random();
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confetti.style.transition = `all ${2 + Math.random() * 3}s linear`;
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '9999';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.style.top = '100%';
+                    confetti.style.transform = `rotate(${Math.random() * 720}deg)`;
+                }, 10);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
         }
 
         // Keyboard navigation
@@ -1374,133 +1468,6 @@
                 e.returnValue = '';
             }
         });
-
-        // Add smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Add animation on scroll for review items
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        // Observe review items when they're created
-        const observeReviewItems = () => {
-            document.querySelectorAll('.review-item').forEach(item => {
-                observer.observe(item);
-            });
-        };
-
-        // Mobile touch support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            if (document.querySelector('.question-screen').classList.contains('active')) {
-                if (touchEndX < touchStartX - 50 && currentQuestion < questions.length - 1) {
-                    nextQuestion();
-                }
-                if (touchEndX > touchStartX + 50 && currentQuestion > 0) {
-                    previousQuestion();
-                }
-            }
-        }
-
-        // Add confetti effect for high scores
-        function createConfetti() {
-            const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
-            const confettiCount = 100;
-            
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.top = '-10px';
-                confetti.style.opacity = Math.random();
-                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                confetti.style.transition = `all ${2 + Math.random() * 3}s linear`;
-                document.body.appendChild(confetti);
-                
-                setTimeout(() => {
-                    confetti.style.top = '100%';
-                    confetti.style.transform = `rotate(${Math.random() * 720}deg)`;
-                }, 10);
-                
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
-            }
-        }
-
-        // Call confetti for scores >= 85%
-        function checkForHighScore(score) {
-            if (score >= 85) {
-                setTimeout(createConfetti, 500);
-            }
-        }
-
-        // Update finishExam to include confetti
-        const originalFinishExam = finishExam;
-        finishExam = function() {
-            originalFinishExam();
-            
-            let correctCount = 0;
-            questions.forEach((question, index) => {
-                if (userAnswers[index] === question.correct) {
-                    correctCount++;
-                }
-            });
-            
-            const score = Math.round((correctCount / questions.length) * 100);
-            checkForHighScore(score);
-            
-            // Call observer for review items after they're created
-            setTimeout(observeReviewItems, 100);
-        };
-
-        // Add question bookmarking feature
-        let bookmarkedQuestions = new Set();
-
-        function toggleBookmark(questionIndex) {
-            if (bookmarkedQuestions.has(questionIndex)) {
-                bookmarkedQuestions.delete(questionIndex);
-            } else {
-                bookmarkedQuestions.add(questionIndex);
-            }
-            updateBookmarkUI();
-        }
-
-        function updateBookmarkUI() {
-            // This would update bookmark indicators in the UI
-            // Implementation depends on adding bookmark buttons to the interface
-        }
 
         // Auto-save progress to localStorage
         function saveProgress() {
@@ -1541,30 +1508,60 @@
         };
 
         // Clear saved progress when exam is finished
-        const originalFinishExamWithClear = finishExam;
+        const originalFinishExam = finishExam;
         finishExam = function() {
-            originalFinishExamWithClear();
+            originalFinishExam();
             localStorage.removeItem('examProgress');
         };
 
         // Load progress on page load
         window.addEventListener('load', loadProgress);
 
-        // Add dark mode toggle (optional enhancement)
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-        }
+        // Mobile touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
 
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (document.querySelector('.question-screen').classList.contains('active')) {
+                if (touchEndX < touchStartX - 50 && currentQuestion < questions.length - 1) {
+                    nextQuestion();
+                }
+                if (touchEndX > touchStartX + 50 && currentQuestion > 0) {
+                    previousQuestion();
+                }
+            }
         }
 
         // Console Easter egg
         console.log('%c🎓 UTS Data Mining System', 'font-size: 24px; font-weight: bold; color: #667eea;');
         console.log('%cDeveloped with ❤️ for students', 'font-size: 14px; color: #764ba2;');
         console.log('%cGood luck with your exam! 🍀', 'font-size: 14px; color: #28a745;');
+        
+        // Add custom styles for MathJax
+        const style = document.createElement('style');
+        style.textContent = `
+            .MathJax {
+                font-size: 1.1em !important;
+            }
+            
+            .option .MathJax {
+                font-size: 1em !important;
+            }
+            
+            mjx-container {
+                margin: 0 5px !important;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

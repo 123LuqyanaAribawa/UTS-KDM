@@ -110,6 +110,56 @@
             font-weight: bold;
         }
 
+        /* Settings Box */
+        .settings-box {
+            background: #e8f0fe;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .settings-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .setting-item {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #667eea;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+
         .btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -135,6 +185,15 @@
 
         .btn-secondary {
             background: #6c757d;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-danger {
+            background: #dc3545;
         }
 
         .progress-bar {
@@ -171,6 +230,16 @@
             font-size: 1.1em;
             font-weight: bold;
             color: #dc3545;
+        }
+
+        .timer.warning {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
 
         .question-text {
@@ -220,9 +289,14 @@
         }
 
         .option.selected {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
+            background: #667eea !important;
+            color: white !important;
+            border-color: #667eea !important;
+            transform: scale(1.02);
+        }
+
+        .option.selected .option-label {
+            color: white !important;
         }
 
         .option.correct {
@@ -245,7 +319,89 @@
         .navigation {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Question Navigator */
+        .question-navigator {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .question-navigator.show {
+            display: block;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .nav-item {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover {
+            background: #e9ecef;
+        }
+
+        .nav-item.answered {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .nav-item.current {
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.3);
+        }
+
+        .nav-item.flagged {
+            background: #ffc107;
+            color: #333;
+            border-color: #ffc107;
+        }
+
+        /* Flag Button */
+        .flag-button {
+            background: #ffc107;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .flag-button:hover {
+            background: #ffb300;
+        }
+
+        .flag-button.flagged {
+            background: #ff6b6b;
+            color: white;
         }
 
         .result-summary {
@@ -372,6 +528,103 @@
             margin-top: 5px;
         }
 
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+                .modal-body {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Performance Chart */
+        .performance-chart {
+            margin: 30px 0;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .chart-label {
+            width: 150px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .chart-progress {
+            flex: 1;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 0 10px;
+        }
+
+        .chart-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+
         @media (max-width: 600px) {
             .header h1 {
                 font-size: 1.8em;
@@ -392,6 +645,16 @@
             
             .score-text {
                 font-size: 2em;
+            }
+
+            .nav-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .nav-item {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9em;
             }
         }
 
@@ -416,13 +679,58 @@
         .slide-in {
             animation: slideIn 0.5s ease-out;
         }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body.dark-mode .container {
+            background: #0f3460;
+            color: #e8e8e8;
+        }
+
+        body.dark-mode .header {
+            background: linear-gradient(135deg, #e94560 0%, #0f3460 100%);
+        }
+
+        body.dark-mode .info-box,
+        body.dark-mode .settings-box,
+        body.dark-mode .option,
+        body.dark-mode .review-item,
+        body.dark-mode .stat-card,
+        body.dark-mode .question-navigator,
+        body.dark-mode .performance-chart {
+            background: #16213e;
+            border-color: #e94560;
+        }
+
+        body.dark-mode .option.selected {
+            background: #e94560 !important;
+            color: white !important;
+            border-color: #e94560 !important;
+        }
+
+        body.dark-mode .question-text,
+        body.dark-mode .review-question {
+            color: #e8e8e8;
+        }
+
+        body.dark-mode .modal-content {
+            background: #16213e;
+            color: #e8e8e8;
+        }
+
+        body.dark-mode .modal-header {
+            color: #e8e8e8;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>📊 UTS Data Mining</h1>
-            <p>Sistem Ujian Online - 60 Soal Pilihan Ganda</p>
+            <p>Sistem Ujian Online - 93 soal Pilihan Ganda</p>
         </div>
 
         <!-- Start Screen -->
@@ -430,7 +738,7 @@
             <div class="info-box">
                 <h3>📋 Informasi Ujian</h3>
                 <ul>
-                    <li>Jumlah Soal: 60 soal pilihan ganda</li>
+                    <li>Jumlah Soal: 93 soal pilihan ganda</li>
                     <li>Waktu: 90 menit</li>
                     <li>Passing Grade: 60%</li>
                     <li>Setiap soal bernilai sama</li>
@@ -448,13 +756,42 @@
                 </ul>
             </div>
 
+            <div class="settings-box">
+                <h3>⚙️ Pengaturan Ujian</h3>
+                <div class="setting-item">
+                    <label>Acak Soal</label>
+                    <div class="toggle-switch" id="randomizeToggle" onclick="toggleSetting('randomize')">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>Acak Pilihan Jawaban</label>
+                    <div class="toggle-switch" id="randomizeOptionsToggle" onclick="toggleSetting('randomizeOptions')">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>Mode Gelap</label>
+                    <div class="toggle-switch" id="darkModeToggle" onclick="toggleSetting('darkMode')">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>Tampilkan Navigator Soal</label>
+                    <div class="toggle-switch active" id="showNavigatorToggle" onclick="toggleSetting('showNavigator')">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="info-box">
                 <h3>⚠️ Peraturan Ujian</h3>
                 <ul>
                     <li>Jawab semua soal sebelum waktu habis</li>
                     <li>Anda dapat mengubah jawaban sebelum submit</li>
+                    <li>Gunakan tombol flag untuk menandai soal yang ragu</li>
+                    <li>Navigator soal membantu melacak progress</li>
                     <li>Hasil akan ditampilkan setelah ujian selesai</li>
-                    <li>Review jawaban tersedia di akhir ujian</li>
                 </ul>
             </div>
 
@@ -474,13 +811,27 @@
                 <div class="timer" id="timer">90:00</div>
             </div>
 
+            <div class="question-navigator" id="questionNavigator">
+                <h4>Navigator Soal</h4>
+                <div class="nav-grid" id="navGrid"></div>
+            </div>
+
             <div class="question-text" id="questionText"></div>
 
             <ul class="options" id="optionsList"></ul>
 
             <div class="navigation">
-                <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn">← Sebelumnya</button>
-                <button class="btn" onclick="nextQuestion()" id="nextBtn">Selanjutnya →</button>
+                <button class="flag-button" onclick="toggleFlag()" id="flagBtn">
+                    🚩 Tandai Soal
+                </button>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn">← Sebelumnya</button>
+                    <button class="btn" onclick="nextQuestion()" id="nextBtn">Selanjutnya →</button>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-warning" onclick="showSubmitConfirmation()">Submit Ujian</button>
             </div>
         </div>
 
@@ -505,9 +856,18 @@
                     <div class="stat-label">Salah</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="timeSpent">0:00</div>
-                                        <div class="stat-label">Waktu</div>
+                    <div class="stat-value" id="unansweredCount">0</div>
+                    <div class="stat-label">Tidak Dijawab</div>
                 </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="timeSpent">0:00</div>
+                    <div class="stat-label">Waktu</div>
+                </div>
+            </div>
+
+            <div class="performance-chart">
+                <h3>📊 Analisis Performa per Topik</h3>
+                <div id="topicPerformance"></div>
             </div>
 
             <div class="answer-review" id="answerReview">
@@ -517,6 +877,22 @@
             <div style="text-align: center; margin-top: 30px;">
                 <button class="btn" onclick="retakeExam()">Ulangi Ujian</button>
                 <button class="btn btn-secondary" onclick="downloadResult()">Download Hasil</button>
+                <button class="btn btn-secondary" onclick="printResult()">Cetak Hasil</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Confirmation Modal -->
+    <div class="modal" id="submitModal">
+        <div class="modal-content">
+            <div class="modal-header">Konfirmasi Submit</div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin mengakhiri ujian?</p>
+                <p id="unansweredWarning"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                <button class="btn btn-danger" onclick="finishExam()">Submit</button>
             </div>
         </div>
     </div>
@@ -533,27 +909,37 @@
             }
         };
 
-        // Data soal dengan persamaan matematika
-        const questions = [
+        // Settings
+        const settings = {
+            randomize: false,
+            randomizeOptions: false,
+            darkMode: false,
+            showNavigator: true
+        };
+
+        // Original questions array
+        const originalQuestions = [
             {
-                question: "Menurut Han dan Kamber (2006) dalam PDF 'Konsep Data Mining', data mining merupakan proses:",
+                question: "Menurut Han dan Kamber (2006), data mining merupakan proses:",
                 options: [
                     "Pengumpulan data dari berbagai sumber",
                     "Pemilihan atau 'menambang' pengetahuan dari jumlah data yang banyak",
                     "Penyimpanan data dalam data warehouse",
                     "Visualisasi data untuk presentasi"
                 ],
-                correct: 1
+                correct: 1,
+                topic: "Konsep Data Mining"
             },
             {
-                question: "Tahapan dalam proses KDD (Knowledge Discovery in Databases) yang berfokus pada pendefinisian permasalahan atau tantangan bisnis dengan jelas disebut:",
+                question: "Tahapan dalam proses KDD (Knowledge Discovery in Databases) yang benar secara berurutan adalah:",
                 options: [
-                    "Data Preparation",
-                    "Data Mining",
-                    "Business Objective Determination",
-                    "Assimilation of Knowledge"
+                    "Data Mining, Data Preparation, Business Objective Determination, Analysis of Results, Assimilation of Knowledge",
+                    "Business Objective Determination, Data Preparation, Data Mining, Analysis of Results, Assimilation of Knowledge",
+                    "Data Preparation, Data Mining, Business Objective Determination, Assimilation of Knowledge, Analysis of Results",
+                    "Business Objective Determination, Data Mining, Data Preparation, Analysis of Results, Assimilation of Knowledge"
                 ],
-                correct: 2
+                correct: 1,
+                topic: "KDD Process"
             },
             {
                 question: "Komponen dalam Arsitektur Sistem Data Mining yang berfungsi sebagai alat bantu yang digunakan oleh end user adalah:",
@@ -563,7 +949,8 @@
                     "Pattern Evaluation",
                     "Graphical User Interface (GUI)"
                 ],
-                correct: 3
+                correct: 3,
+                topic: "Arsitektur Data Mining"
             },
             {
                 question: "Model Data Mining yang bertujuan untuk menjelaskan karakteristik data yang ada, seperti pengelompokan data, disebut model:",
@@ -573,17 +960,19 @@
                     "Deskriptif",
                     "Diagnostik"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Model Data Mining"
             },
             {
-                question: "Berikut ini yang termasuk dalam model Data Mining Prediktif adalah, kecuali:",
+                question: "Berikut ini yang termasuk dalam model Data Mining Prediktif adalah:",
                 options: [
-                    "Classification",
-                    "Regression",
-                    "Clustering",
-                    "Forecasting"
+                    "Clustering dan Association Rule",
+                    "Classification dan Regression",
+                    "Summarization dan Sequence Discovery",
+                    "Clustering dan Summarization"
                 ],
-                correct: 2
+                correct: 1,
+                topic: "Model Data Mining"
             },
             {
                 question: "Proses penempatan objek-objek ke salah satu dari beberapa kategori yang telah ditetapkan sebelumnya dalam Data Mining disebut:",
@@ -593,7 +982,8 @@
                     "Association Rule",
                     "Classification"
                 ],
-                correct: 3
+                correct: 3,
+                topic: "Classification"
             },
             {
                 question: "Dalam pembangunan model klasifikasi, dataset yang digunakan untuk membangun atau melatih model disebut:",
@@ -603,7 +993,8 @@
                     "Training Set",
                     "Unlabeled Set"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Classification"
             },
             {
                 question: "Node dalam Decision Tree yang tidak memiliki edge yang masuk dan memiliki nol atau banyak edge yang keluar disebut:",
@@ -613,7 +1004,8 @@
                     "Root Node",
                     "Parent Node"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Decision Tree"
             },
             {
                 question: "Model klasifikasi yang mengklasifikasikan record dengan menggunakan koleksi aturan 'if ... then ...' adalah:",
@@ -623,7 +1015,8 @@
                     "Support Vector Machine",
                     "Rule-Based Classifier"
                 ],
-                correct: 3
+                correct: 3,
+                topic: "Classification"
             },
             {
                 question: "Asumsi utama yang mendasari Naive Bayes Classifier adalah:",
@@ -633,7 +1026,8 @@
                     "Setiap variabel (atribut) bersifat bebas (conditionally independent)",
                     "Data tidak mengandung outlier"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Naive Bayes"
             },
             {
                 question: "Rumus $$P(X|C_i) = \\prod_{k=1}^{n} P(x_k|C_i)$$ digunakan dalam model klasifikasi:",
@@ -644,7 +1038,8 @@
                     "K-Nearest Neighbors"
                 ],
                 correct: 2,
-                hasEquation: true
+                hasEquation: true,
+                topic: "Naive Bayes"
             },
             {
                 question: "Metode klasifikasi yang bekerja atas prinsip Structural Risk Minimization (SRM) dengan tujuan menemukan hyperplane terbaik yang memisahkan dua buah kelas adalah:",
@@ -654,7 +1049,8 @@
                     "Support Vector Machine (SVM)",
                     "Rule-Based Classifier"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "SVM"
             },
             {
                 question: "Dalam SVM, objek data terluar yang paling dekat dengan hyperplane dan berperan penting dalam menentukan hyperplane optimal disebut:",
@@ -664,7 +1060,8 @@
                     "Support Vector",
                     "Optimal Vector"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "SVM"
             },
             {
                 question: "Metode Decision Tree termasuk ke dalam jenis pembelajaran mesin:",
@@ -674,7 +1071,8 @@
                     "Supervised Learning",
                     "Semi-supervised Learning"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Decision Tree"
             },
             {
                 question: "Berikut ini adalah salah satu kelebihan dari Decision Tree, kecuali:",
@@ -684,7 +1082,8 @@
                     "Sangat tahan terhadap overfitting tanpa perlu pruning",
                     "Dapat menemukan kombinasi data yang tidak terduga"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Decision Tree"
             },
             {
                 question: "Ukuran yang digunakan untuk mengukur kesamaan (homogeneity) atau ketidaksamaan (heterogeneity) data dalam sebuah node pada Decision Tree disebut:",
@@ -694,7 +1093,8 @@
                     "Impurity",
                     "Split Value"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Decision Tree"
             },
             {
                 question: "Rumus $$Gini = 1 - \\sum p_j^2$$ digunakan untuk menghitung impurity dengan metode:",
@@ -705,17 +1105,19 @@
                     "Misclassification Rate"
                 ],
                 correct: 1,
-                hasEquation: true
+                hasEquation: true,
+                topic: "Decision Tree"
             },
             {
-                question: "Jika probabilitas kelas 'Bad' adalah 0.375 dan kelas 'Good' adalah 0.625, maka nilai Impurity Parent menggunakan Classification Error Index adalah:",
+                question: "Jika probabilitas kelas 'Bad' adalah 0.375 dan kelas 'Good' adalah 0.625, maka nilai Gini Index adalah:",
                 options: [
                     "0.29",
                     "0.47",
                     "0.375",
                     "0.625"
                 ],
-                correct: 2
+                correct: 1,
+                topic: "Decision Tree"
             },
             {
                 question: "Ukuran yang digunakan untuk menentukan seberapa baik sebuah atribut dapat memisahkan data ke dalam kelas-kelas yang lebih murni disebut:",
@@ -725,17 +1127,19 @@
                     "Node Purity",
                     "Attribute Weight"
                 ],
-                correct: 1
+                correct: 1,
+                topic: "Decision Tree"
             },
             {
-                question: "Dalam PDF 'SIMILARITY dan DISSIMILARITY', pengukuran numerik tentang seberapa mirip 2 data objek, yang umumnya memiliki range [0,1], disebut:",
+                question: "Pengukuran numerik tentang seberapa mirip 2 data objek, yang umumnya memiliki range [0,1], disebut:",
                 options: [
                     "Dissimilarity",
                     "Distance",
                     "Correlation",
                     "Similarity"
                 ],
-                correct: 3
+                correct: 3,
+                topic: "Similarity Measures"
             },
             {
                 question: "Semakin kecil jarak antara dua objek, maka kesamaannya akan:",
@@ -745,7 +1149,8 @@
                     "Tidak berubah",
                     "Tidak dapat ditentukan"
                 ],
-                correct: 1
+                correct: 1,
+                topic: "Similarity Measures"
             },
             {
                 question: "Rumus $$d(x,y) = \\sqrt{\\sum_{k=1}^{n} (x_k - y_k)^2}$$ adalah rumus untuk:",
@@ -756,7 +1161,8 @@
                     "Hamming Distance"
                 ],
                 correct: 2,
-                hasEquation: true
+                hasEquation: true,
+                topic: "Similarity Measures"
             },
             {
                 question: "Minkowski Distance menjadi identik dengan Manhattan Distance ketika parameter r bernilai:",
@@ -766,7 +1172,8 @@
                     "2",
                     "∞"
                 ],
-                correct: 1
+                correct: 1,
+                topic: "Similarity Measures"
             },
             {
                 question: "Metode pengukuran jarak yang umumnya digunakan untuk data String atau biner dengan menghitung jumlah posisi di mana simbol berbeda adalah:",
@@ -776,17 +1183,19 @@
                     "Jaccard Coefficient",
                     "Hamming Distance"
                 ],
-                correct: 3
+                correct: 3,
+                topic: "Similarity Measures"
             },
             {
-                question: "Algoritma yang sering digunakan dalam teks mining untuk mengklasifikasikan dokumen berdasarkan kesamaan sudut antar vektor adalah:",
+                question: "Algoritma yang sering digunakan dalam text mining untuk mengklasifikasikan dokumen berdasarkan kesamaan sudut antar vektor adalah:",
                 options: [
                     "Euclidean Distance",
                     "Simple Matching Coefficient",
                     "Cosine Similarity",
                     "Hamming Distance"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Similarity Measures"
             },
             {
                 question: "Diberikan dua objek biner A=(1,1,0,1) dan B=(1,0,0,1). Jumlah atribut di mana kedua objek sama-sama bernilai 1 (M11) adalah:",
@@ -796,7 +1205,8 @@
                     "3",
                     "4"
                 ],
-                correct: 1
+                correct: 1,
+                topic: "Similarity Measures"
             },
             {
                 question: "Simple Matching Coefficient (SMC) memperhitungkan:",
@@ -806,7 +1216,8 @@
                     "Kecocokan di mana kedua atribut bernilai 1 dan kedua atribut bernilai 0",
                     "Hanya kecocokan di mana atribut pertama bernilai 1 dan kedua bernilai 0"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Similarity Measures"
             },
             {
                 question: "Jaccard Coefficient berbeda dengan SMC karena Jaccard Coefficient:",
@@ -816,7 +1227,8 @@
                     "Hanya untuk data numerik",
                     "Memiliki range nilai [-1,1]"
                 ],
-                correct: 1
+                correct: 1,
+                topic: "Similarity Measures"
             },
             {
                 question: "Tahap dalam proses KDD yang melibatkan penggunaan algoritma untuk mengekstrak pola dari data yang telah diproses adalah:",
@@ -826,7 +1238,8 @@
                     "Data Mining",
                     "Pattern Evaluation"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "KDD Process"
             },
             {
                 question: "Dalam Decision Tree, node yang merepresentasikan keputusan akhir atau kelas dari data disebut:",
@@ -836,7 +1249,8 @@
                     "Branch Node",
                     "Leaf Node / Terminal Node"
                 ],
-                correct: 3
+                correct: 3,
+                topic: "Decision Tree"
             },
             {
                 question: "Jika sebuah node pada Decision Tree memiliki Gini Index = 0, maka node tersebut:",
@@ -846,7 +1260,8 @@
                     "Murni (semua data dalam node tersebut termasuk dalam satu kelas)",
                     "Perlu di-split lebih lanjut"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Decision Tree"
             },
             {
                 question: "Kekurangan utama dari Naive Bayes Classifier adalah:",
@@ -856,7 +1271,8 @@
                     "Asumsi independensi antar atribut yang seringkali tidak valid di dunia nyata",
                     "Hanya bisa digunakan untuk data numerik"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Naive Bayes"
             },
             {
                 question: "Tujuan dari Support Vector Machine (SVM) adalah untuk menemukan:",
@@ -866,17 +1282,8 @@
                     "Hyperplane dengan margin maksimal antar kelas",
                     "Pohon keputusan dengan kedalaman minimal"
                 ],
-                correct: 2
-            },
-            {
-                question: "Pengukuran jarak yang paling sesuai untuk menghitung perbedaan antara dua string 'apel' dan 'apply' adalah:",
-                options: [
-                    "Euclidean Distance",
-                    "Hamming Distance",
-                    "Cosine Similarity",
-                    "Jaccard Coefficient"
-                ],
-                correct: 1
+                correct: 2,
+                topic: "SVM"
             },
             {
                 question: "Jika nilai Similarity antara dua dokumen adalah 0.95, ini mengindikasikan bahwa kedua dokumen tersebut:",
@@ -886,27 +1293,8 @@
                     "Cukup mirip",
                     "Sangat mirip"
                 ],
-                correct: 3
-            },
-            {
-                question: "Dalam PDF 'Konsep Data Mining' (Pertemuan 1), evolusi Data Mining pada tahun 1970-an ditandai dengan munculnya:",
-                options: [
-                    "Data collection dan database creation",
-                    "Relational data model dan relational DBMS implementation",
-                    "RDBMS dan advanced data models",
-                    "Data mining dan data warehousing"
-                ],
-                correct: 1
-            },
-            {
-                question: "Menurut Berry (2004) dalam PDF 'Konsep Data Mining' (Pertemuan 1), data mining adalah kegiatan mengeksplorasi dan menganalisis data jumlah besar untuk menemukan:",
-                options: [
-                    "Kesalahan dalam data",
-                    "Struktur database yang optimal",
-                    "Pattern dan rule yang berarti",
-                                        "Algoritma kompresi data"
-                ],
-                correct: 2
+                correct: 3,
+                topic: "Similarity Measures"
             },
             {
                 question: "Tahap dalam proses KDD yang bertujuan untuk meyakinkan kualitas dari data yang telah dipilih pada tahapan sebelumnya, termasuk menangani noisy data dan missing values, adalah:",
@@ -916,27 +1304,19 @@
                     "Data Preprocessing",
                     "Data Mining"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "KDD Process"
             },
             {
-                question: "Contoh pengetahuan berbentuk Association Rule seperti 'IF seorang customer cenderung lebih banyak membeli soft drink merk X, THEN customer tersebut diprediksi Mudah Rusak Loyalitasnya' termasuk dalam tahap apa pada proses KDD?",
-                options: [
-                    "Business Objective Determination",
-                    "Data Preparation",
-                    "Data Mining",
-                    "Analysis of Results"
-                ],
-                correct: 2
-            },
-            {
-                question: "Komponen dalam Arsitektur Sistem Data Mining yang merupakan kegiatan untuk menemukan pola data yang bernilai melalui knowledge base adalah:",
+                                question: "Komponen dalam Arsitektur Sistem Data Mining yang merupakan kegiatan untuk menemukan pola data yang bernilai melalui knowledge base adalah:",
                 options: [
                     "Graphical User Interface (GUI)",
                     "Data Mining Engine",
                     "Pattern Evaluation",
                     "Database/Data Warehouse Server"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Arsitektur Data Mining"
             },
             {
                 question: "Model Data Mining Time Series Analysis berhubungan dengan:",
@@ -946,7 +1326,8 @@
                     "Nilai-nilai suatu variabel yang diatur secara periodik sepanjang periode waktu",
                     "Menemukan aturan sebab-akibat antar item"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Model Data Mining"
             },
             {
                 question: "Teknik yang berusaha menirukan bagaimana otak bekerja, dengan syaraf-syaraf yang mengirimkan informasi satu sama lain, adalah model Data Mining:",
@@ -956,17 +1337,19 @@
                     "Neural Network",
                     "Association Rule"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Model Data Mining"
             },
             {
-                question: "Proses untuk melakukan segmentasi atau pengelompokan secara alami terhadap atribut suatu set data, termasuk ke dalam supervised task, adalah:",
+                question: "Proses untuk melakukan segmentasi atau pengelompokan secara alami terhadap atribut suatu set data, termasuk ke dalam unsupervised task, adalah:",
                 options: [
                     "Classification",
                     "Summarization",
                     "Clustering",
                     "Sequence Discovery"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Model Data Mining"
             },
             {
                 question: "Model Data Mining yang digunakan untuk meneliti berbagai macam kegiatan data mining yang diteliti berdasarkan urutan kejadian untuk mengidentifikasi keterkaitannya dengan waktu adalah:",
@@ -976,7 +1359,8 @@
                     "Sequence Discovery",
                     "Forecasting"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Model Data Mining"
             },
             {
                 question: "Kunci utama algoritma pembelajaran dalam klasifikasi adalah membangun model dengan kemampuan generalisasi yang baik, artinya:",
@@ -986,17 +1370,8 @@
                     "Model secara akurat memprediksi label kelas dari record yang tidak diketahui sebelumnya",
                     "Model dapat menjelaskan semua variasi dalam data training"
                 ],
-                correct: 2
-            },
-            {
-                question: "Dalam Decision Tree untuk klasifikasi hewan mamalia, jika vertebrata berdarah dingin (cold-blooded), maka leaf node yang terbentuk adalah:",
-                options: [
-                    "Mammals",
-                    "Birds",
-                    "Non-mammals",
-                    "Reptiles"
-                ],
-                correct: 2
+                correct: 2,
+                topic: "Classification"
             },
             {
                 question: "Dalam Rule-Based Classifier, bagian 'IF' dari aturan 'IF (Kondisi) THEN y' disebut:",
@@ -1006,17 +1381,8 @@
                     "Rule Antecedent",
                     "Prediction"
                 ],
-                correct: 2
-            },
-            {
-                question: "Berdasarkan studi kasus Bayesian Classifier, jumlah data dengan kelas 'Beli Komputer: Ya' adalah:",
-                options: [
-                    "5",
-                    "9",
-                    "14",
-                    "Tidak dapat ditentukan dari slide tersebut saja"
-                ],
-                correct: 1
+                correct: 2,
+                topic: "Classification"
             },
             {
                 question: "Dalam perhitungan $$P(X|C_i) \\times P(C_i)$$ pada Naive Bayes, $$P(C_i)$$ merepresentasikan:",
@@ -1027,7 +1393,8 @@
                     "Probabilitas posterior dari kelas Ci"
                 ],
                 correct: 2,
-                hasEquation: true
+                hasEquation: true,
+                topic: "Naive Bayes"
             },
             {
                 question: "Teknik soft margin dalam SVM digunakan ketika:",
@@ -1037,7 +1404,8 @@
                     "Kedua kelas data tidak selalu terpisah secara sempurna oleh hyperplane",
                     "Margin yang dihasilkan terlalu lebar"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "SVM"
             },
             {
                 question: "Salah satu kelemahan Decision Tree adalah tumpang tindih yang terjadi terutama ketika sangat banyak kelas dan kriteria yang digunakan. Hal ini dapat menyebabkan:",
@@ -1047,7 +1415,8 @@
                     "Waktu keputusan yang lebih lama dan memori yang dibutuhkan lebih banyak",
                     "Model yang lebih sederhana"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Decision Tree"
             },
             {
                 question: "Jika nilai Impurity Parent dengan Gini Index adalah 0.47, dan setelah di-split berdasarkan atribut 'Assets', Information Gain yang diperoleh adalah 0.2825. Ini berarti atribut 'Assets':",
@@ -1057,7 +1426,8 @@
                     "Memberikan pengurangan impurity yang signifikan",
                     "Membuat node menjadi lebih heterogen"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Decision Tree"
             },
             {
                 question: "Pada Iterasi ke-2 dalam pembangunan Decision Tree, tabel parent hanya mengambil data di mana atribut 'Assets' bernilai 'Medium'. Ini dilakukan karena:",
@@ -1067,7 +1437,8 @@
                     "Atribut 'Income' memiliki Information Gain tertinggi",
                     "Data dengan 'Assets' bernilai 'Medium' paling banyak jumlahnya"
                 ],
-                correct: 0
+                correct: 0,
+                topic: "Decision Tree"
             },
             {
                 question: "Pengukuran numerik tentang seberapa berbeda 2 data objek, yang nilainya akan makin tinggi untuk 2 objek yang berbeda, disebut:",
@@ -1077,7 +1448,8 @@
                     "Dissimilarity",
                     "Covariance"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Similarity Measures"
             },
             {
                 question: "Jika dua objek data identik, maka nilai Euclidean Distance antara keduanya adalah:",
@@ -1087,7 +1459,8 @@
                     "-1",
                     "Tidak terdefinisi"
                 ],
-                correct: 1
+                correct: 1,
+                topic: "Similarity Measures"
             },
             {
                 question: "Minkowski Distance dengan parameter r = ∞ dikenal juga sebagai:",
@@ -1097,7 +1470,8 @@
                     "Chebyshev Distance",
                     "Hamming Distance"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Similarity Measures"
             },
             {
                 question: "Dalam perhitungan Cosine Similarity, jika hasil dot product antara dua vektor A dan B adalah 0, maka kedua vektor tersebut:",
@@ -1107,7 +1481,8 @@
                     "Ortogonal (tegak lurus, menunjukkan tidak ada kesamaan arah)",
                     "Memiliki panjang yang sama"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Similarity Measures"
             },
             {
                 question: "Diberikan dua objek biner X=(1,0,1,0) dan Y=(1,1,0,0). Nilai M10 (atribut X=1, Y=0) adalah:",
@@ -1117,7 +1492,8 @@
                     "2",
                     "3"
                 ],
-                correct: 1
+                correct: 1,
+                topic: "Similarity Measures"
             },
             {
                 question: "Jika Jaccard Coefficient antara dua set item adalah 1, ini berarti:",
@@ -1127,7 +1503,8 @@
                     "Kedua set identik (memiliki semua item yang sama dan tidak ada item lain)",
                     "Salah satu set adalah subset dari yang lain"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "Similarity Measures"
             },
             {
                 question: "Proses mengubah data mentah menjadi format yang sesuai untuk analisis, yang meliputi seleksi fitur dan reduksi dimensionalitas, adalah bagian dari:",
@@ -1137,23 +1514,545 @@
                     "Data Preparation / Preprocessing",
                     "Assimilation of Knowledge"
                 ],
-                correct: 2
+                correct: 2,
+                topic: "KDD Process"
+            },
+            {
+                question: "Tahap dalam KDD yang paling banyak mengonsumsi resources (manusia, biaya, waktu) dan biasanya mencapai 60% dari keseluruhan proyek adalah:",
+                options: [
+                    "Business Objective Determination",
+                    "Data Mining",
+                    "Data Preparation",
+                    "Assimilation of Knowledge"
+                ],
+                correct: 2,
+                topic: "KDD Process"
+            },
+            {
+                question: "Kegiatan untuk membuang data yang tidak konsisten dalam arsitektur sistem Data Mining disebut:",
+                options: [
+                    "Data Integration",
+                    "Filtering",
+                    "Pattern Evaluation",
+                    "Data Cleaning"
+                ],
+                correct: 3,
+                topic: "Arsitektur Data Mining"
+            },
+            {
+                question: "Rumus untuk menghitung Entropy sebagai ukuran impurity adalah:",
+                options: [
+                    "$$Entropy = 1 - \\sum p_j^2$$",
+                    "$$Entropy = -\\sum_{j} p_j \\log_2 p_j$$",
+                    "$$Entropy = 1 - \\max\\{p_j\\}$$",
+                    "$$Entropy = \\sum p_j \\log_2 p_j$$"
+                ],
+                correct: 1,
+                hasEquation: true,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Rumus untuk menghitung Classification Error sebagai ukuran impurity adalah:",
+                options: [
+                    "$$Classification Error = -\\sum p_j \\log_2 p_j$$",
+                    "$$Classification Error = 1 - \\sum p_j^2$$",
+                    "$$Classification Error = 1 - \\max_{j}\\{p_j\\}$$",
+                    "$$Classification Error = \\min_{j}\\{p_j\\}$$"
+                ],
+                correct: 2,
+                hasEquation: true,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Untuk atribut Nominal dalam pengukuran dissimilarity, jika x = y maka d = 0, dan jika x ≠ y maka d =:",
+                options: [
+                    "0",
+                    "1",
+                    "|x-y|",
+                    "∞"
+                ],
+                correct: 1,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Untuk atribut Ordinal dengan nilai yang dipetakan ke integer 0 sampai n-1, dissimilarity d antara dua nilai x dan y didefinisikan sebagai:",
+                options: [
+                    "$$d = |x-y|$$",
+                    "$$d = \\frac{|x-y|}{(n-1)}$$",
+                    "$$d = 1 - \\frac{|x-y|}{(n-1)}$$",
+                    "$$d = (x-y)^2$$"
+                ],
+                correct: 1,
+                hasEquation: true,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Jika similarity antara dua objek adalah s, maka dissimilarity d dapat dihitung sebagai:",
+                options: [
+                    "d = s",
+                    "d = 1 + s",
+                    "d = 1 - s",
+                    "d = 1/s"
+                ],
+                correct: 2,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Rumus Cosine Similarity antara dua vektor A dan B adalah:",
+                options: [
+                    "$$\\frac{||A - B||}{||A|| + ||B||}$$",
+                    "$$\\frac{A \\cdot B}{||A|| \\cdot ||B||}$$",
+                    "$$1 - \\frac{A \\cdot B}{||A|| \\cdot ||B||}$$",
+                    "$$\\sum (A_i - B_i)$$"
+                ],
+                correct: 1,
+                hasEquation: true,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Proses pembangunan model klasifikasi yang melibatkan Training Set untuk membuat model disebut:",
+                options: [
+                    "Deduction",
+                    "Induction",
+                    "Application",
+                    "Evaluation"
+                ],
+                correct: 1,
+                topic: "Classification"
+            },
+            {
+                question: "Contoh dari model Data Mining Deskriptif adalah:",
+                options: [
+                    "Decision Tree dan Neural Network",
+                    "Clustering dan Association Rule",
+                    "Regression dan Forecasting",
+                    "Classification dan Time Series Analysis"
+                ],
+                correct: 1,
+                topic: "Model Data Mining"
+            },
+            {
+                question: "Model Data Mining yang menghasilkan sejumlah rule yang menjelaskan sejumlah data yang berhubungan kuat satu dengan yang lainnya, seperti 'IF A THEN B', adalah:",
+                options: [
+                    "Sequence Discovery",
+                    "Association Rule",
+                    "Summarization",
+                    "Time Series Analysis"
+                ],
+                correct: 1,
+                topic: "Model Data Mining"
+            },
+            {
+                question: "Komponen dalam arsitektur sistem Data Mining yang menyimpan pengetahuan atau pola yang telah ditemukan adalah:",
+                options: [
+                    "Database",
+                    "Data Warehouse",
+                    "Data Mining Engine",
+                    "Knowledge-base"
+                ],
+                correct: 3,
+                topic: "Arsitektur Data Mining"
+            },
+            {
+                question: "Jika sebuah perusahaan ingin menganalisis kenaikan atau penurunan suatu produk dalam tiga bulan ke depan berdasarkan data historis, model Data Mining yang paling sesuai adalah:",
+                options: [
+                    "Clustering",
+                    "Association Rule",
+                    "Forecasting",
+                    "Summarization"
+                ],
+                correct: 2,
+                topic: "Model Data Mining"
+            },
+            {
+                question: "Teknik yang digunakan untuk memprediksi nilai yang berkelanjutan (numerik), bukan label kelas kategorikal, adalah:",
+                options: [
+                    "Classification",
+                    "Clustering",
+                    "Regression",
+                    "Association Rule"
+                ],
+                correct: 2,
+                topic: "Model Data Mining"
+            },
+            {
+                                question: "Dalam Decision Tree untuk klasifikasi hewan mamalia, jika vertebrata berdarah dingin (cold-blooded), maka leaf node yang terbentuk adalah:",
+                options: [
+                    "Mammals",
+                    "Birds",
+                    "Non-mammals",
+                    "Reptiles"
+                ],
+                correct: 2,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Rumus untuk menghitung Information Gain menggunakan Gini Index adalah:",
+                options: [
+                    "$$Gain(Parent, Atribut) = Gini_{Parent} - \\sum_{v \\in Atribut} \\frac{|S_v|}{|S|} Gini_{S_v}$$",
+                    "$$Gain(Parent, Atribut) = \\sum_{v \\in Atribut} \\frac{|S_v|}{|S|} Gini_{S_v} - Gini_{Parent}$$",
+                    "$$Gain(Parent, Atribut) = Gini_{Parent} + \\sum_{v \\in Atribut} \\frac{|S_v|}{|S|} Gini_{S_v}$$",
+                    "$$Gain(Parent, Atribut) = 1 - Gini_{Parent}$$"
+                ],
+                correct: 0,
+                hasEquation: true,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Jika sebuah node memiliki distribusi kelas: Kelas A = 3, Kelas B = 5 (Total 8 data). Maka probabilitas untuk Kelas A dan Kelas B adalah:",
+                options: [
+                    "P(A) = 3/5, P(B) = 5/3",
+                    "P(A) = 0.3, P(B) = 0.5",
+                    "P(A) = 3/8 = 0.375, P(B) = 5/8 = 0.625",
+                    "P(A) = 8/3, P(B) = 8/5"
+                ],
+                correct: 2,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Menggunakan probabilitas P(A) = 0.375 dan P(B) = 0.625, nilai Gini Index untuk node tersebut adalah:",
+                options: [
+                    "1 - (0.375² - 0.625²)",
+                    "1 - (0.375 + 0.625)",
+                    "1 - (0.375² + 0.625²) = 1 - (0.140625 + 0.390625) = 0.46875",
+                    "0.375 × 0.625"
+                ],
+                correct: 2,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Jika setelah iterasi pertama dalam pembangunan Decision Tree, atribut 'Assets' memiliki Information Gain tertinggi, maka 'Assets' akan menjadi:",
+                options: [
+                    "Leaf Node",
+                    "Internal Node pada level kedua",
+                    "Root Node",
+                    "Atribut yang diabaikan"
+                ],
+                correct: 2,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Dalam Rule-Based Classifier, bagian 'Class=Birds' dari aturan 'IF (Blood Type=Warm) AND (Lay Eggs=Yes) THEN Class=Birds' adalah:",
+                options: [
+                    "Antecedent",
+                    "Kondisi",
+                    "Konjungsi atribut",
+                    "Rule Consequent (RHS)"
+                ],
+                correct: 3,
+                topic: "Classification"
+            },
+            {
+                question: "Keputusan klasifikasi akhir dalam Naive Bayes untuk instance X adalah kelas Ci yang memiliki nilai:",
+                options: [
+                    "P(Ci|X) minimum",
+                    "P(X|Ci) × P(Ci) maksimum",
+                    "P(X|Ci) maksimum",
+                    "P(Ci) maksimum"
+                ],
+                correct: 1,
+                topic: "Naive Bayes"
+            },
+            {
+                question: "Prinsip yang mendasari SVM dengan tujuan menemukan hyperplane terbaik yang memisahkan dua buah kelas pada input space adalah:",
+                options: [
+                    "Maximum Likelihood Estimation (MLE)",
+                    "Structural Risk Minimization (SRM)",
+                    "Minimum Description Length (MDL)",
+                    "Empirical Risk Minimization (ERM)"
+                ],
+                correct: 1,
+                topic: "SVM"
+            },
+            {
+                question: "Rumus Manhattan Distance (City Block Distance) antara dua titik x dan y dengan n dimensi adalah:",
+                options: [
+                    "$$d(x,y) = \\sqrt{\\sum_{k=1}^{n} (x_k - y_k)^2}$$",
+                    "$$d(x,y) = \\sum_{k=1}^{n} |x_k - y_k|$$",
+                    "$$d(x,y) = \\max_k |x_k - y_k|$$",
+                    "$$d(x,y) = \\min_k |x_k - y_k|$$"
+                ],
+                correct: 1,
+                hasEquation: true,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Minkowski Distance adalah generalisasi dari Euclidean Distance. Jika parameter r = 2, maka jarak tersebut setara dengan:",
+                options: [
+                    "Manhattan Distance",
+                    "Chebyshev Distance",
+                    "Hamming Distance",
+                    "Euclidean Distance"
+                ],
+                correct: 3,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Untuk atribut biner, Simple Matching Coefficient (SMC) dihitung dengan rumus (p=jumlah 1-1, q=jumlah 1-0, r=jumlah 0-1, s=jumlah 0-0):",
+                options: [
+                    "SMC = p/(p+q+r)",
+                    "SMC = (p+s)/(p+q+r+s)",
+                    "SMC = p/(p+q+r+s)",
+                    "SMC = s/(p+q+r+s)"
+                ],
+                correct: 1,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Untuk atribut biner, Jaccard Coefficient dihitung dengan rumus:",
+                options: [
+                    "Jaccard = (p+s)/(p+q+r+s)",
+                    "Jaccard = p/(p+q+r)",
+                    "Jaccard = p/(p+s)",
+                    "Jaccard = (q+r)/(p+q+r+s)"
+                ],
+                correct: 1,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Perbedaan utama antara SMC dan Jaccard Coefficient dalam menangani atribut biner adalah:",
+                options: [
+                    "SMC mengabaikan pasangan (0,0) sementara Jaccard memperhitungkannya",
+                    "Jaccard mengabaikan pasangan (0,0) sementara SMC memperhitungkannya",
+                    "SMC hanya untuk data numerik, Jaccard untuk data biner",
+                    "Tidak ada perbedaan signifikan antara keduanya"
+                ],
+                correct: 1,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Jika dua objek data memiliki jarak Euclidean yang kecil, maka kesamaan (similarity) antara keduanya cenderung:",
+                options: [
+                    "Kecil",
+                    "Besar",
+                    "Tidak dapat ditentukan",
+                    "Nol"
+                ],
+                correct: 1,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Jika sebuah node memiliki distribusi kelas: Kelas X = 2, Kelas Y = 6 (Total 8). Nilai Entropy untuk node ini adalah:",
+                options: [
+                    "$$-(0.25 \\log_2 0.25 + 0.75 \\log_2 0.75)$$",
+                    "$$-(0.25 \\log_2 0.75 + 0.75 \\log_2 0.25)$$",
+                    "$$1 - (0.25^2 + 0.75^2)$$",
+                    "$$0.25 \\times 0.75$$"
+                ],
+                correct: 0,
+                hasEquation: true,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Menggunakan data P(X) = 0.25 dan P(Y) = 0.75, nilai Classification Error untuk node tersebut adalah:",
+                options: [
+                    "1 - 0.25 = 0.75",
+                    "1 - 0.75 = 0.25",
+                    "1 - (0.25 + 0.75) = 0",
+                    "0.75"
+                ],
+                correct: 1,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Proses memecah data menjadi himpunan bagian yang lebih kecil dalam pembangunan Decision Tree disebut:",
+                options: [
+                    "Pruning",
+                    "Merging",
+                    "Splitting",
+                    "Aggregating"
+                ],
+                correct: 2,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Salah satu kelemahan Decision Tree adalah:",
+                options: [
+                    "Sulit mengintegrasikan dengan sistem basis data",
+                    "Tidak mampu menangani data kategorikal",
+                    "Kesulitan dalam merancang pohon keputusan yang optimal dan rentan terhadap tumpang tindih",
+                    "Akurasi yang selalu rendah dibandingkan metode lain"
+                ],
+                correct: 2,
+                topic: "Decision Tree"
+            },
+            {
+                question: "Untuk atribut Interval atau Ratio, dissimilarity d antara dua nilai x dan y umumnya didefinisikan sebagai:",
+                options: [
+                    "d = 1 jika x ≠ y",
+                    "d = |x-y|/(n-1)",
+                    "d = |x-y|",
+                    "d = 1 - |x-y|"
+                ],
+                correct: 2,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Jika vektor A = [5, 1, 2] dan B = [2, 0, 3], maka dot product A·B adalah:",
+                options: [
+                    "(5×1×2) + (2×0×3)",
+                    "(5+2) + (1+0) + (2+3)",
+                    "(5×2) + (1×0) + (2×3) = 10 + 0 + 6 = 16",
+                    "√(5²+1²+2²) × √(2²+0²+3²)"
+                ],
+                correct: 2,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Panjang vektor (magnitude) ||A|| untuk A = [5, 1, 2] adalah:",
+                options: [
+                    "5+1+2 = 8",
+                    "√(5²+1²+2²) = √30 ≈ 5.477",
+                    "5×1×2 = 10",
+                    "(5²+1²+2²) = 30"
+                ],
+                correct: 1,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Pengukuran jarak yang menjadi prinsip dasar untuk algoritma k-Nearest Neighbors (KNN) adalah:",
+                options: [
+                    "Hanya Similarity",
+                    "Distance (Dissimilarity)",
+                    "Hanya Correlation",
+                    "Covariance"
+                ],
+                correct: 1,
+                topic: "Similarity Measures"
+            },
+            {
+                question: "Menurut Thomas H. Davenport dan Laurence Prusak, pengetahuan (knowledge) merupakan gabungan dari, kecuali:",
+                options: [
+                    "Pengalaman dan nilai",
+                    "Informasi kontekstual",
+                    "Pandangan pakar dan framework",
+                    "Data mentah yang belum diproses"
+                ],
+                correct: 3,
+                topic: "Konsep Data Mining"
+            },
+            {
+                question: "Dalam klasifikasi, input berupa himpunan atribut (x) dipetakan ke output berupa:",
+                options: [
+                    "Sekumpulan aturan asosiasi",
+                    "Label kelas (atribut target) (y)",
+                    "Sebuah nilai numerik kontinu",
+                    "Kelompok (cluster) data"
+                ],
+                correct: 1,
+                topic: "Classification"
+            },
+            {
+                question: "Pada pohon keputusan, node yang dinyatakan sebagai label kelas adalah:",
+                options: [
+                    "Root Node",
+                    "Internal Node",
+                    "Non-terminal Node",
+                    "Leaf Node (Terminal Node)"
+                ],
+                correct: 3,
+                topic: "Decision Tree"
             }
         ];
-
         // Global variables
+        let questions = [...originalQuestions];
         let currentQuestion = 0;
         let userAnswers = new Array(questions.length).fill(null);
+        let flaggedQuestions = new Set();
         let startTime = Date.now();
         let timerInterval;
         let timeLimit = 90 * 60; // 90 minutes in seconds
 
+        // Toggle settings
+        function toggleSetting(setting) {
+            settings[setting] = !settings[setting];
+            const toggle = document.getElementById(setting + 'Toggle');
+            toggle.classList.toggle('active');
+            
+            if (setting === 'darkMode') {
+                document.body.classList.toggle('dark-mode');
+            }
+        }
+
+        // Shuffle array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
         // Start exam
         function startExam() {
+            // Apply randomization if enabled
+            if (settings.randomize) {
+                questions = shuffleArray([...originalQuestions]);
+            } else {
+                questions = [...originalQuestions];
+            }
+            
+            // Reset variables
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            flaggedQuestions.clear();
+            startTime = Date.now();
+            timeLimit = 90 * 60;
+            
             document.querySelector('.start-screen').classList.remove('active');
             document.querySelector('.question-screen').classList.add('active');
+            
+            // Initialize navigator
+            if (settings.showNavigator) {
+                initializeNavigator();
+                document.getElementById('questionNavigator').classList.add('show');
+            }
+            
             startTimer();
             showQuestion();
+        }
+
+        // Initialize question navigator
+        function initializeNavigator() {
+            const navGrid = document.getElementById('navGrid');
+            navGrid.innerHTML = '';
+            
+            for (let i = 0; i < questions.length; i++) {
+                const navItem = document.createElement('div');
+                navItem.className = 'nav-item';
+                navItem.textContent = i + 1;
+                navItem.onclick = () => jumpToQuestion(i);
+                navGrid.appendChild(navItem);
+            }
+        }
+
+        // Jump to specific question
+        function jumpToQuestion(index) {
+            currentQuestion = index;
+            showQuestion();
+        }
+
+        // Update navigator
+        function updateNavigator() {
+            if (!settings.showNavigator) return;
+            
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach((item, index) => {
+                item.classList.remove('current', 'answered', 'flagged');
+                
+                if (index === currentQuestion) {
+                    item.classList.add('current');
+                }
+                
+                if (userAnswers[index] !== null) {
+                    item.classList.add('answered');
+                }
+                
+                if (flaggedQuestions.has(index)) {
+                    item.classList.add('flagged');
+                }
+            });
         }
 
         // Timer function
@@ -1162,8 +2061,14 @@
                 timeLimit--;
                 const minutes = Math.floor(timeLimit / 60);
                 const seconds = timeLimit % 60;
-                document.getElementById('timer').textContent = 
+                const timerElement = document.getElementById('timer');
+                timerElement.textContent = 
                     `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Warning when 5 minutes left
+                if (timeLimit <= 300) {
+                    timerElement.classList.add('warning');
+                }
                 
                 if (timeLimit <= 0) {
                     clearInterval(timerInterval);
@@ -1172,7 +2077,7 @@
             }, 1000);
         }
 
-        // Show question
+        // Show question - PERBAIKAN DI SINI
         function showQuestion() {
             const question = questions[currentQuestion];
             document.getElementById('questionNumber').textContent = 
@@ -1182,17 +2087,34 @@
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
             
-            question.options.forEach((option, index) => {
+            // Get options (randomize if enabled)
+            let options = question.options.map((option, index) => ({ text: option, originalIndex: index }));
+            if (settings.randomizeOptions) {
+                options = shuffleArray(options);
+            }
+            
+            options.forEach((option, displayIndex) => {
                 const li = document.createElement('li');
                 li.className = 'option';
-                if (userAnswers[currentQuestion] === index) {
+                
+                // Set data attribute untuk tracking
+                li.setAttribute('data-original-index', option.originalIndex);
+                
+                // Check if this option was selected
+                if (userAnswers[currentQuestion] === option.originalIndex) {
                     li.classList.add('selected');
                 }
+                
                 li.innerHTML = `
-                    <span class="option-label">${String.fromCharCode(65 + index)}.</span>
-                    ${option}
+                    <span class="option-label">${String.fromCharCode(65 + displayIndex)}.</span>
+                    ${option.text}
                 `;
-                li.onclick = () => selectOption(index);
+                
+                // Event listener
+                li.addEventListener('click', function() {
+                    selectOption(option.originalIndex);
+                });
+                
                 optionsList.appendChild(li);
             });
             
@@ -1205,21 +2127,64 @@
             document.getElementById('nextBtn').textContent = 
                 currentQuestion === questions.length - 1 ? 'Selesai' : 'Selanjutnya →';
             
+            // Update flag button
+            const flagBtn = document.getElementById('flagBtn');
+            if (flaggedQuestions.has(currentQuestion)) {
+                flagBtn.classList.add('flagged');
+                flagBtn.innerHTML = '🚩 Hapus Tanda';
+            } else {
+                flagBtn.classList.remove('flagged');
+                flagBtn.innerHTML = '🚩 Tandai Soal';
+            }
+            
+            // Update navigator
+            updateNavigator();
+            
             // Re-render MathJax if question has equations
             if (question.hasEquation) {
                 setTimeout(() => {
-                    MathJax.typesetPromise([document.getElementById('questionText')]).catch((e) => console.error(e));
+                            // Render untuk question text
+        MathJax.typesetPromise([document.getElementById('questionText')]).catch((e) => console.error(e));
+        
+        // Render untuk semua options juga
+        MathJax.typesetPromise([document.getElementById('optionsList')]).catch((e) => console.error(e));
                 }, 100);
             }
         }
 
-        // Select option
+        // Select option - PERBAIKAN DI SINI
         function selectOption(index) {
+            // Simpan jawaban
             userAnswers[currentQuestion] = index;
-            const options = document.querySelectorAll('.option');
-            options.forEach((option, i) => {
-                option.classList.toggle('selected', i === index);
+            
+            // Hapus semua class selected
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.classList.remove('selected');
             });
+            
+            // Tambahkan class selected ke option yang diklik
+            const selectedOption = document.querySelector(`.option[data-original-index="${index}"]`);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+            
+            // Update navigator
+            updateNavigator();
+            
+            // Save progress
+            saveProgress();
+        }
+
+        // Toggle flag
+        function toggleFlag() {
+            if (flaggedQuestions.has(currentQuestion)) {
+                flaggedQuestions.delete(currentQuestion);
+            } else {
+                                flaggedQuestions.add(currentQuestion);
+            }
+            showQuestion();
+            saveProgress();
         }
 
         // Navigation
@@ -1235,19 +2200,49 @@
                 currentQuestion++;
                 showQuestion();
             } else {
-                finishExam();
+                showSubmitConfirmation();
             }
+        }
+
+        // Show submit confirmation
+        function showSubmitConfirmation() {
+            const unanswered = userAnswers.filter(answer => answer === null).length;
+            const modal = document.getElementById('submitModal');
+            const warning = document.getElementById('unansweredWarning');
+            
+            if (unanswered > 0) {
+                warning.textContent = `Anda masih memiliki ${unanswered} soal yang belum dijawab.`;
+                warning.style.color = '#dc3545';
+            } else {
+                warning.textContent = 'Semua soal telah dijawab.';
+                warning.style.color = '#28a745';
+            }
+            
+            modal.classList.add('show');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('submitModal').classList.remove('show');
         }
 
         // Finish exam
         function finishExam() {
             clearInterval(timerInterval);
+            closeModal();
             
             // Calculate results
             let correctCount = 0;
+            let incorrectCount = 0;
+            let unansweredCount = 0;
+            
             questions.forEach((question, index) => {
-                if (userAnswers[index] === question.correct) {
+                if (userAnswers[index] === null) {
+                    unansweredCount++;
+                } else if (userAnswers[index] === question.correct) {
                     correctCount++;
+                } else {
+                    incorrectCount++;
                 }
             });
             
@@ -1262,7 +2257,8 @@
             
             document.getElementById('scoreText').textContent = score + '%';
             document.getElementById('correctCount').textContent = correctCount;
-            document.getElementById('incorrectCount').textContent = questions.length - correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+            document.getElementById('unansweredCount').textContent = unansweredCount;
             document.getElementById('timeSpent').textContent = 
                 `${minutes}:${seconds.toString().padStart(2, '0')}`;
             
@@ -1288,16 +2284,64 @@
             
             const gradeElement = document.getElementById('gradeText');
             gradeElement.textContent = `Grade: ${grade}`;
-                        gradeElement.className = `grade ${gradeClass}`;
+            gradeElement.className = `grade ${gradeClass}`;
             document.getElementById('gradeMessage').textContent = gradeMessage;
+            
+            // Show topic performance
+            showTopicPerformance();
             
             // Show answer review
             showAnswerReview();
+            
+            // Clear saved progress
+            localStorage.removeItem('examProgress');
             
             // Confetti for high scores
             if (score >= 85) {
                 setTimeout(createConfetti, 500);
             }
+        }
+
+        // Show topic performance analysis
+        function showTopicPerformance() {
+            const topicStats = {};
+            
+            // Calculate stats per topic
+            questions.forEach((question, index) => {
+                const topic = question.topic;
+                if (!topicStats[topic]) {
+                    topicStats[topic] = { correct: 0, total: 0 };
+                }
+                
+                topicStats[topic].total++;
+                if (userAnswers[index] === question.correct) {
+                    topicStats[topic].correct++;
+                }
+            });
+            
+            // Display topic performance
+            const container = document.getElementById('topicPerformance');
+            container.innerHTML = '';
+            
+            Object.entries(topicStats).forEach(([topic, stats]) => {
+                const percentage = Math.round((stats.correct / stats.total) * 100);
+                const chartBar = document.createElement('div');
+                chartBar.className = 'chart-bar';
+                chartBar.innerHTML = `
+                    <div class="chart-label">${topic}</div>
+                    <div class="chart-progress">
+                        <div class="chart-fill" style="width: 0%">
+                            ${percentage}%
+                        </div>
+                    </div>
+                `;
+                container.appendChild(chartBar);
+                
+                // Animate chart
+                setTimeout(() => {
+                    chartBar.querySelector('.chart-fill').style.width = percentage + '%';
+                }, 100);
+            });
         }
 
         // Show answer review
@@ -1306,30 +2350,46 @@
             reviewContainer.innerHTML = '<h3>📝 Review Jawaban</h3>';
             
             questions.forEach((question, index) => {
-                const isCorrect = userAnswers[index] === question.correct;
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                const isUnanswered = userAnswer === null;
+                
                 const reviewItem = document.createElement('div');
                 reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
                 
-                let questionHTML = question.question;
+                let statusText, statusClass;
+                if (isUnanswered) {
+                    statusText = '⚪ Tidak Dijawab';
+                    statusClass = 'incorrect';
+                } else if (isCorrect) {
+                    statusText = '✓ Benar';
+                    statusClass = 'correct';
+                } else {
+                    statusText = '✗ Salah';
+                    statusClass = 'incorrect';
+                }
                 
                 reviewItem.innerHTML = `
                     <div class="review-header">
-                        <span>Soal ${index + 1}</span>
-                        <span class="review-status ${isCorrect ? 'correct' : 'incorrect'}">
-                            ${isCorrect ? '✓ Benar' : '✗ Salah'}
+                        <span>Soal ${index + 1} ${flaggedQuestions.has(index) ? '🚩' : ''}</span>
+                        <span class="review-status ${statusClass}">
+                            ${statusText}
                         </span>
                     </div>
-                    <div class="review-question">${questionHTML}</div>
+                    <div class="review-question">${question.question}</div>
                     ${!isCorrect ? `
                         <div class="review-answer your-answer">
-                            Jawaban Anda: ${userAnswers[index] !== null ? 
-                                String.fromCharCode(65 + userAnswers[index]) + '. ' + 
-                                question.options[userAnswers[index]] : 'Tidak dijawab'}
+                            Jawaban Anda: ${isUnanswered ? 'Tidak dijawab' : 
+                                String.fromCharCode(65 + userAnswer) + '. ' + 
+                                question.options[userAnswer]}
                         </div>
                     ` : ''}
                     <div class="review-answer correct-answer">
                         Jawaban Benar: ${String.fromCharCode(65 + question.correct)}. 
                         ${question.options[question.correct]}
+                    </div>
+                    <div style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                        Topik: ${question.topic}
                     </div>
                 `;
                 
@@ -1348,6 +2408,7 @@
         function retakeExam() {
             currentQuestion = 0;
             userAnswers = new Array(questions.length).fill(null);
+            flaggedQuestions.clear();
             startTime = Date.now();
             timeLimit = 90 * 60;
             
@@ -1358,9 +2419,16 @@
         // Download result
         function downloadResult() {
             let correctCount = 0;
+            let incorrectCount = 0;
+            let unansweredCount = 0;
+            
             questions.forEach((question, index) => {
-                if (userAnswers[index] === question.correct) {
+                if (userAnswers[index] === null) {
+                    unansweredCount++;
+                } else if (userAnswers[index] === question.correct) {
                     correctCount++;
+                } else {
+                    incorrectCount++;
                 }
             });
             
@@ -1377,26 +2445,55 @@
             resultText += `${'-'.repeat(30)}\n`;
             resultText += `Total Soal: ${questions.length}\n`;
             resultText += `Jawaban Benar: ${correctCount}\n`;
-            resultText += `Jawaban Salah: ${questions.length - correctCount}\n`;
+            resultText += `Jawaban Salah: ${incorrectCount}\n`;
+            resultText += `Tidak Dijawab: ${unansweredCount}\n`;
             resultText += `Skor: ${score}%\n`;
             resultText += `Grade: ${score >= 85 ? 'A' : score >= 70 ? 'B' : score >= 60 ? 'C' : 'D'}\n`;
             resultText += `Waktu Pengerjaan: ${minutes}:${seconds.toString().padStart(2, '0')}\n\n`;
-            resultText += `DETAIL JAWABAN\n`;
+            
+            // Topic performance
+            resultText += `PERFORMA PER TOPIK\n`;
+            resultText += `${'='.repeat(50)}\n`;
+            
+            const topicStats = {};
+            questions.forEach((question, index) => {
+                const topic = question.topic;
+                if (!topicStats[topic]) {
+                    topicStats[topic] = { correct: 0, total: 0 };
+                }
+                topicStats[topic].total++;
+                if (userAnswers[index] === question.correct) {
+                    topicStats[topic].correct++;
+                }
+            });
+            
+            Object.entries(topicStats).forEach(([topic, stats]) => {
+                const percentage = Math.round((stats.correct / stats.total) * 100);
+                resultText += `${topic}: ${stats.correct}/${stats.total} (${percentage}%)\n`;
+            });
+            
+            resultText += `\nDETAIL JAWABAN\n`;
             resultText += `${'='.repeat(50)}\n\n`;
             
             questions.forEach((question, index) => {
-                const isCorrect = userAnswers[index] === question.correct;
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                const isUnanswered = userAnswer === null;
+                
                 // Remove HTML tags and LaTeX from question text for plain text export
                 let cleanQuestion = question.question.replace(/\$\$[^$]+\$\$/g, '[Persamaan Matematika]');
                 cleanQuestion = cleanQuestion.replace(/\$[^$]+\$/g, '[Rumus]');
                 
-                resultText += `Soal ${index + 1}: ${isCorrect ? '✓ BENAR' : '✗ SALAH'}\n`;
+                resultText += `Soal ${index + 1}: ${isUnanswered ? '⚪ TIDAK DIJAWAB' : isCorrect ? '✓ BENAR' : '✗ SALAH'}`;
+                if (flaggedQuestions.has(index)) resultText += ' 🚩';
+                resultText += `\n`;
+                resultText += `Topik: ${question.topic}\n`;
                 resultText += `Pertanyaan: ${cleanQuestion}\n`;
                 
                 if (!isCorrect) {
-                    resultText += `Jawaban Anda: ${userAnswers[index] !== null ? 
-                        String.fromCharCode(65 + userAnswers[index]) + '. ' + 
-                        question.options[userAnswers[index]] : 'Tidak dijawab'}\n`;
+                    resultText += `Jawaban Anda: ${isUnanswered ? 'Tidak dijawab' : 
+                        String.fromCharCode(65 + userAnswer) + '. ' + 
+                        question.options[userAnswer]}\n`;
                 }
                 
                 resultText += `Jawaban Benar: ${String.fromCharCode(65 + question.correct)}. ${question.options[question.correct]}\n`;
@@ -1413,6 +2510,11 @@
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
+        }
+
+        // Print result
+        function printResult() {
+            window.print();
         }
 
         // Create confetti effect
@@ -1454,9 +2556,22 @@
                 } else if (e.key === 'ArrowRight' && currentQuestion < questions.length - 1) {
                     nextQuestion();
                 } else if (e.key >= '1' && e.key <= '4') {
-                    selectOption(parseInt(e.key) - 1);
+                    const index = parseInt(e.key) - 1;
+                                        // Find the option with this display index
+                    const options = document.querySelectorAll('.option');
+                    if (options[index]) {
+                        const originalIndex = parseInt(options[index].getAttribute('data-original-index'));
+                        selectOption(originalIndex);
+                    }
                 } else if (e.key.toLowerCase() >= 'a' && e.key.toLowerCase() <= 'd') {
-                    selectOption(e.key.toLowerCase().charCodeAt(0) - 97);
+                    const index = e.key.toLowerCase().charCodeAt(0) - 97;
+                    const options = document.querySelectorAll('.option');
+                    if (options[index]) {
+                        const originalIndex = parseInt(options[index].getAttribute('data-original-index'));
+                        selectOption(originalIndex);
+                    }
+                } else if (e.key === 'f' || e.key === 'F') {
+                    toggleFlag();
                 }
             }
         });
@@ -1474,8 +2589,11 @@
             const progress = {
                 currentQuestion,
                 userAnswers,
+                flaggedQuestions: Array.from(flaggedQuestions),
                 timeLimit,
-                startTime
+                startTime,
+                settings,
+                questionOrder: questions.map(q => originalQuestions.indexOf(q))
             };
             localStorage.setItem('examProgress', JSON.stringify(progress));
         }
@@ -1487,11 +2605,32 @@
                 if (confirm('Anda memiliki ujian yang belum selesai. Lanjutkan?')) {
                     currentQuestion = progress.currentQuestion;
                     userAnswers = progress.userAnswers;
+                    flaggedQuestions = new Set(progress.flaggedQuestions);
                     timeLimit = progress.timeLimit;
                     startTime = progress.startTime;
                     
+                    // Restore settings
+                    Object.assign(settings, progress.settings);
+                    
+                    // Restore question order
+                    if (progress.questionOrder) {
+                        questions = progress.questionOrder.map(index => originalQuestions[index]);
+                    }
+                    
+                    // Apply settings
+                    if (settings.darkMode) {
+                        document.body.classList.add('dark-mode');
+                        document.getElementById('darkModeToggle').classList.add('active');
+                    }
+                    
                     document.querySelector('.start-screen').classList.remove('active');
                     document.querySelector('.question-screen').classList.add('active');
+                    
+                    if (settings.showNavigator) {
+                        initializeNavigator();
+                        document.getElementById('questionNavigator').classList.add('show');
+                    }
+                    
                     startTimer();
                     showQuestion();
                 } else {
@@ -1499,20 +2638,6 @@
                 }
             }
         }
-
-        // Save progress every time user answers
-        const originalSelectOption = selectOption;
-        selectOption = function(index) {
-            originalSelectOption(index);
-            saveProgress();
-        };
-
-        // Clear saved progress when exam is finished
-        const originalFinishExam = finishExam;
-        finishExam = function() {
-            originalFinishExam();
-            localStorage.removeItem('examProgress');
-        };
 
         // Load progress on page load
         window.addEventListener('load', loadProgress);
@@ -1542,8 +2667,9 @@
         }
 
         // Console Easter egg
-        console.log('%c🎓 UTS Data Mining System', 'font-size: 24px; font-weight: bold; color: #667eea;');
+        console.log('%c🎓 UTS Data Mining System v2.0', 'font-size: 24px; font-weight: bold; color: #667eea;');
         console.log('%cDeveloped with ❤️ for students', 'font-size: 14px; color: #764ba2;');
+        console.log('%cFeatures: Question randomization, Dark mode, Progress tracking, Topic analysis', 'font-size: 12px; color: #666;');
         console.log('%cGood luck with your exam! 🍀', 'font-size: 14px; color: #28a745;');
         
         // Add custom styles for MathJax
@@ -1560,8 +2686,206 @@
             mjx-container {
                 margin: 0 5px !important;
             }
+            
+            @media print {
+                body {
+                    background: white;
+                }
+                
+                .container {
+                    box-shadow: none;
+                    max-width: 100%;
+                }
+                
+                .btn {
+                    display: none;
+                }
+                
+                .result-screen {
+                    padding: 20px;
+                }
+                
+                .score-circle {
+                    box-shadow: none;
+                    border: 3px solid #667eea;
+                }
+                
+                .review-item {
+                    page-break-inside: avoid;
+                }
+            }
         `;
         document.head.appendChild(style);
+
+        // Add print styles
+        const printStyle = document.createElement('style');
+        printStyle.media = 'print';
+        printStyle.textContent = `
+            @page {
+                margin: 1cm;
+            }
+            
+            .header {
+                background: none !important;
+                color: #333 !important;
+                border-bottom: 2px solid #667eea;
+            }
+            
+            .score-text {
+                color: #667eea !important;
+            }
+            
+            .stat-card {
+                border: 1px solid #ddd;
+            }
+            
+            .chart-fill {
+                background: #667eea !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+        `;
+        document.head.appendChild(printStyle);
+
+        // Accessibility improvements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add ARIA labels
+            document.querySelector('.progress-bar').setAttribute('role', 'progressbar');
+            document.querySelector('.progress-bar').setAttribute('aria-label', 'Progress ujian');
+            
+            // Add keyboard focus indicators
+            const focusableElements = document.querySelectorAll('button, .option, .nav-item');
+            focusableElements.forEach(el => {
+                el.setAttribute('tabindex', '0');
+            });
+        });
+
+        // Performance optimization
+        const debounce = (func, wait) => {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        };
+
+        // Debounced save progress
+        const debouncedSaveProgress = debounce(saveProgress, 1000);
+
+        // Add visibility change handler to pause timer when tab is not visible
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && timerInterval) {
+                // Optional: You could pause the timer here
+                console.log('Tab is hidden');
+            } else {
+                console.log('Tab is visible');
+            }
+        });
+
+        // Add network status handler
+        window.addEventListener('online', () => {
+            console.log('Back online');
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('Gone offline - progress is saved locally');
+        });
+
+        // Initialize tooltips for better UX
+        function initTooltips() {
+            const tooltipElements = [
+                { selector: '.flag-button', text: 'Tandai soal untuk review nanti' },
+                { selector: '.nav-item', text: 'Klik untuk langsung ke soal' }
+            ];
+            
+            tooltipElements.forEach(({ selector, text }) => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(el => {
+                    el.setAttribute('title', text);
+                });
+            });
+        }
+
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Export results to JSON (for advanced users)
+        function exportResultsJSON() {
+            const results = {
+                examDate: new Date().toISOString(),
+                score: Math.round((userAnswers.filter((ans, idx) => ans === questions[idx].correct).length / questions.length) * 100),
+                timeSpent: Math.floor((Date.now() - startTime) / 1000),
+                answers: questions.map((q, idx) => ({
+                    questionNumber: idx + 1,
+                    question: q.question,
+                    userAnswer: userAnswers[idx],
+                    correctAnswer: q.correct,
+                    isCorrect: userAnswers[idx] === q.correct,
+                    topic: q.topic,
+                    flagged: flaggedQuestions.has(idx)
+                })),
+                topicPerformance: {}
+            };
+            
+            // Calculate topic performance
+            questions.forEach((q, idx) => {
+                if (!results.topicPerformance[q.topic]) {
+                    results.topicPerformance[q.topic] = { correct: 0, total: 0 };
+                }
+                results.topicPerformance[q.topic].total++;
+                if (userAnswers[idx] === q.correct) {
+                    results.topicPerformance[q.topic].correct++;
+                }
+            });
+            
+            return results;
+        }
+
+        // Add export JSON button (hidden by default, can be enabled via console)
+        window.enableJSONExport = function() {
+            const resultScreen = document.querySelector('.result-screen');
+            const exportBtn = document.createElement('button');
+            exportBtn.className = 'btn btn-secondary';
+            exportBtn.textContent = 'Export JSON';
+            exportBtn.onclick = () => {
+                const results = exportResultsJSON();
+                const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `exam_results_${new Date().getTime()}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+            resultScreen.querySelector('div[style*="text-align: center"]').appendChild(exportBtn);
+        };
+
+        // Analytics (if needed in future)
+        window.examAnalytics = {
+            getAverageTimePerQuestion: () => {
+                const totalTime = Math.floor((Date.now() - startTime) / 1000);
+                return Math.round(totalTime / questions.length);
+            },
+            getMostTimeSpentQuestion: () => {
+                // This would require tracking time per question
+                return 'Feature not implemented yet';
+            },
+            getAccuracyByTopic: () => {
+                const results = exportResultsJSON();
+                return results.topicPerformance;
+            }
+        };
+
+        // Fix untuk memastikan tooltips diinisialisasi saat start exam
+        const originalStartExam = startExam;
+        startExam = function() {
+            originalStartExam();
+            setTimeout(initTooltips, 100);
+        };
     </script>
 </body>
 </html>
